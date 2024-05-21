@@ -1,0 +1,17 @@
+FILE=CURRENCY_TRANSFER, SUFFIX=SQLMSS ,  $                                                
+SEGNAME=CURRENCY_TRANSFER,  SEGTYPE=S0, $
+
+
+FIELDNAME=ID,                           ALIAS=ID,                   USAGE=A50,             ACTUAL=A50,       $      
+FIELDNAME=DATE,                       ALIAS=DATE,               USAGE=YYMD,          ACTUAL=DATE,  $    
+FIELDNAME=SENDER,                   ALIAS=SENDER,           USAGE=A100,           ACTUAL=A100,  $     
+FIELDNAME=RECEIVER,                ALIAS=RECEIVER,         USAGE=A100,           ACTUAL=A100,  $  
+FIELDNAME=SRC_LOCATION,        ALIAS=SRC_LOCATION,  USAGE=A255,          ACTUAL=A255,       $  
+FIELDNAME=DEST_LOCATION,      ALIAS=DEST_LOCATION, USAGE=A255,          ACTUAL=A255,     $  
+FIELDNAME=AMOUNT,                 ALIAS=AMOUNT,            USAGE=P10,             ACTUAL=P10.2,    $             
+FIELDNAME=SENDING_CUR,         ALIAS=SENDING_CUR,   USAGE=A10,            ACTUAL=A10,       $     
+FIELDNAME=RECEIVING_CUR,      ALIAS=RECEIVING_CUR, USAGE=A10,            ACTUAL=A10,        $
+FIELDNAME=USER,                     ALIAS=USER,                USAGE=A50,             ACTUAL=A50, $
+FIELDNAME=LOCATION,              ALIAS=LOCATION,          USAGE=A255,          ACTUAL=A255,   $         
+FIELDNAME=RATE,                     ALIAS=RATE,                  USAGE=P10,           ACTUAL=P10.2,    $               
+FIELDNAME=R_AMOUNT,                     ALIAS=R_AMOUNT,                  USAGE=P10,           ACTUAL=P10.2,    $   

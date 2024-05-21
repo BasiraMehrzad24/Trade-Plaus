@@ -1,0 +1,7 @@
+FILENAME=DAILY_EXCHANGE, SUFFIX=SQLMSS                                                   
+SEGNAME=DAILY_EXCHANGE,  SEGTYPE=S0  
+FIELDNAME=ID,           ALIAS=ID,         FORMAT=I10,       $      
+FIELDNAME=DATE,   ALIAS=DATE,      USAGE=YYMD, ACTUAL = DATE,    $               
+FIELDNAME=CURRENCY_FROM,    ALIAS=CURRENCY_FROM,          FORMAT=A10,      $     
+FIELDNAME=CURRENCY_TO,    ALIAS=CURRENCY_TO,          FORMAT=A10,   
+FIELDNAME=RATE,   ALIAS=RATE,        FORMAT=P20.5,    $                       

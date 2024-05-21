@@ -1,0 +1,17 @@
+.input{
+border: 2px solid #839788;
+margin-top: 10%;
+border-radius: 5px;
+padding: 3px;
+
+}
+#addItem{
+background-color: #839788;
+color: wheat;
+margin-top: 10%;
+padding: 6px;
+width: 80px;
+
+}
+
+

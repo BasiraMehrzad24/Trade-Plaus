@@ -1,0 +1,9 @@
+FILENAME=SUPERUSER, SUFFIX=SQLMSS                                                   
+SEGNAME=SUPERUSER,  SEGTYPE=S0  
+FIELDNAME=ID,           ALIAS=ID,         FORMAT=I10,       $      
+FIELDNAME=NAME,   ALIAS=NAME,          FORMAT=A50,      $                  
+FIELDNAME=LAST_NAME,    ALIAS=LAST_NAME,          FORMAT=A50,      $     
+FIELDNAME=EMAIL,    ALIAS=EMAIL,       FORMAT=A100,      $  
+FIELDNAME=LOCATION,   ALIAS=LOCATION,        FORMAT=A255,    $ 
+FIELDNAME=ADMIN, ALIAS=ADMIN,     FORMAT=A1, $        
+FIELDNAME=PASSWORD, ALIAS=PASSWORD,     FORMAT=I10, $                  

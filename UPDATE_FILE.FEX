@@ -1,0 +1,49 @@
+-DEFAULT &TAG = 'B_TEST';
+-GOTO &TAG;
+
+-B_TEST
+-HTMLFORM BEGIN
+<style>
+-INCLUDE EDIT.CSS
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+-INCLUDE MAIN.JS
+</script>
+-HTMLFORM END
+
+DEFINE FILE CURRENCY_TRANSFER
+DATE_A/A8YYMD = DATE;
+AMOUNT1/A12 = FTOA(AMOUNT,'(D9)','A12');
+ INPUT_FORM/A100 = '<form method="post" >';
+ INPUT_ID/A250 = '<input type="text" class="input" value=" ' || ID || '" id="input_id" required>';
+ INPUT_DATE/A250 = '<input type="text" class="input" value=" ' || DATE_A || '" id="input_date" required>';
+ INPUT_SENDER/A250 = '<input type="text" class="input" value=" ' || SENDER|| '" id="input_sender" required>';
+ INPUT_RECEIVER/A250 = '<input type="text" class="input" value=" ' || RECEIVER|| '" id="input_receiver" required>';
+ INPUT_SRC_LOCATION/A350 = '<input type="text" class="input" value=" ' || SRC_LOCATION|| '" id="input_src_location" required>';
+ INPUT_DEST_LOCATION/A350 = '<input type="text" class="input" value=" ' || DEST_LOCATION|| '" id="input_dest_location" required>';
+ INPUT_AMOUNT/A250 ='<input type="text" class="input" value=" ' ||AMOUNT1 || '" id="input_amount" required><br>';
+ INPUT_SENDING_CUR/A350 = '<input type="text" class="input" value=" ' || SENDING_CUR|| '" id="input_sending_cur" required><br>';
+  INPUT_RECEIVING_CUR/A350 = '<input type="text" class="input" value=" ' || RECEIVING_CUR|| '" id="input_receiving_cur" required><br>';
+  SAVE_BTN/A350= '<button id="addItem" class="btn"  type="submit" onclick="Update()">Update</button>';
+ INPUT_CLOSE_FORM/A100 = '</form>';
+ END
+ TABLE FILE CURRENCY_TRANSFER
+ PRINT INPUT_ID
+          INPUT_DATE  
+          INPUT_SENDER  
+          INPUT_RECEIVER
+          INPUT_SRC_LOCATION
+          INPUT_DEST_LOCATION
+          INPUT_AMOUNT
+          INPUT_SENDING_CUR
+          INPUT_RECEIVING_CUR
+          SAVE_BTN
+       
+          WHERE ID EQ '&ID.EVAL'
+ON TABLE SET STYLE *
+  TYPE=REPORT,  RIGHTGAP=0.2, LEFTGAP=0.2, GRID=OFF, $
+  TYPE=TITLE, STYLE=-UNDERLINE+BOLD, COLOR=RGB(131 151 136), $
+ENDSTYLE
+END
+-RUN

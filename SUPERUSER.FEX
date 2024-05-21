@@ -1,0 +1,67 @@
+-DEFAULT &&SUPERUSER='N';
+-DEFAULT &TAG='MAIN';
+-SET &TAG = IF &&SUPERUSER EQ 'Y' THEN 'REFRESH' ELSE &TAG;
+-TYPE &&SUPERUSER &TAG
+-GOTO &TAG
+
+-* -INCLUDE CUSTOMERS.FEX
+-*----------------------------------------------- FOR showing logain page 
+
+-MAIN
+-HTMLFORM BEGIN
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+-*css
+    <link type= "text/css"  rel="stylesheet" href="!IBI.GLB.HOMEPATH;/BMEHRZAD/signin.css">
+
+-*bootstrap
+    <link rel="stylesheet" type= "text/css"  href="!IBI.GLB.HOMEPATH;/BMEHRZAD/css/bootstrap.min.css">
+    <link rel="stylesheet" type= "text/javascript"  href="!IBI.GLB.HOMEPATH;/BMEHRZAD/js/bootstrap.bundle.js">
+-*js  
+   <script type="text/javascript"> var gc_RpcType = "!IBI.GLB.RPCTYPE;"; </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script>
+-INCLUDE MAIN.JS
+  </script>
+ </head>
+<body>
+!IBI.FIL.LOGIN.HTML;
+</body>
+</html>
+-HTMLFORM END
+
+
+-*------------------------------------------------for checking if users are exist
+-cUSER
+TABLE FILE SUPERUSER
+PRINT  EMAIL PASSWORD
+WHERE EMAIL EQ '&EMAIL.EVAL' 
+WHERE PASSWORD EQ '&PASSWORD.EVAL'
+ON TABLE HOLD AS SHOWUSER FORMAT ALPHA
+END
+
+-SET &TOTAL=&LINES+0;
+-IF &TOTAL GT 0 THEN  GOTO  MAINPAGE;
+
+-MAINPAGE
+-HTMLFORM BEGIN
+!IBI.AMP.EMAIL;
+!IBI.AMP.PASSWORD;
+-HTMLFORM END
+-GOTO EXIT
+
+-REFRESH
+-INCLUDE MAIN.FEX
+
+
+-HTMLFORM BEGIN
+!IBI.FIL.SHOWUSER;
+-HTMLFORM END
+-EXIT
+
+

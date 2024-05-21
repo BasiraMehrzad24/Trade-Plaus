@@ -1,0 +1,44 @@
+-SET &&SUPERUSER ='Y'; 
+-INCLUDE CUSTOMERS.FEX
+-*----------------------------------------------------------------FOR read data from database using [READFILE] 
+ TABLE FILE SUPERUSER
+ PRINT NAME LOCATION AS LOCA
+ ON TABLE SET ASNAMES ON
+ ON TABLE HOLD AS USER_ADMIN FORMAT ALPHA
+ END
+-RUN
+-SET &NAME= ' ';
+-SET  &LOCA= ' ';
+
+-READFILE USER_ADMIN
+-CLOSE USER_ADMIN
+
+-DEFAULT &NAME= ' ';
+-DEFAULT  &LOCA= ' ';
+
+-SET  &&NAME= &NAME;
+-SET  &&LOCA= &LOCA;
+
+-TYPE &&NAME &&LOCA
+
+
+-HTMLFORM BEGIN
+<html> 
+<head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+-INCLUDE MAIN.JS
+</script>
+<style>
+-INCLUDE style.css
+</style>
+</head>
+<body>
+ !IBI.FIL.MAIN.HTML;
+</body>
+-HTMLFORM END
+
+
+
+
+
