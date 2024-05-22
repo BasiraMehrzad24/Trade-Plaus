@@ -156,33 +156,25 @@ function multiplyAndFill(amount, rate) {
 }
 
 function handleKeyPress(event) {
-    // Check if the pressed key is Enter
     if (event.key === 'Enter') {
-        event.preventDefault(); // Prevent form submission
-
-        // Get the values of amount and rate inputs
+        event.preventDefault(); 
         var amount = parseFloat(document.getElementById('amount').value);
         var rate = parseFloat(document.getElementById('rate').value);
 
-        // Check if both values are numbers
         if (!isNaN(amount) && !isNaN(rate)) {
-            // Multiply the values
             var result = multiplyAndFill(amount, rate);
-
-            // Fill the r_rate input with the result
             document.getElementById('r_amount').value = result;
         } else {
-            // Display an error message if input values are not valid numbers
             alert('Please enter valid numbers.');
         }
     }
 }
+document.addEventListener('keypress', handleKeyPress);
 
 
 function back() {
     $("#customers").removeClass("hidden");
     $("#updateCustomer").addClass("hidden");
-
 }
 
 
