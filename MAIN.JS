@@ -150,6 +150,9 @@ function currencyTransfer() {
     });
 }
 
+
+
+
 function multiplyAndFill(amount, rate) {
     var result = amount * rate;
     return result;
@@ -157,7 +160,7 @@ function multiplyAndFill(amount, rate) {
 
 function handleKeyPress(event) {
     if (event.key === 'Enter') {
-        event.preventDefault(); 
+        event.preventDefault();
         var amount = parseFloat(document.getElementById('amount').value);
         var rate = parseFloat(document.getElementById('rate').value);
 
@@ -166,10 +169,47 @@ function handleKeyPress(event) {
             document.getElementById('r_amount').value = result;
         } else {
             alert('Please enter valid numbers.');
+
         }
     }
 }
 document.addEventListener('keypress', handleKeyPress);
+
+
+
+function Fill(input_amount, input_rate) {
+    return input_amount * input_rate;
+}
+
+function handalFill(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        var input_amount = document.getElementById('input_amount').value;
+        var input_rate = document.getElementById('input_rate').value;
+
+        if (input_amount.trim() !== "" && input_rate.trim() !== "") {
+
+            var int_amount = parseInt(input_amount, 10);
+            var int_rate = parseInt(input_rate, 10);
+
+            if (!isNaN(int_amount) && !isNaN(int_rate)) {
+                var result = Fill(int_amount, int_rate);
+                document.getElementById('input_r_amount').value = result.toString();
+            } else {
+                alert('Please enter valid numbers.');
+            }
+        } else {
+            alert('Please enter valid strings.');
+        }
+
+
+    }
+}
+document.getElementById('input_amount').addEventListener('keypress', handalFill);
+document.getElementById('input_rate').addEventListener('keypress', handalFill);
+
+
+
 
 
 function back() {
@@ -179,7 +219,6 @@ function back() {
 
 
 function updateCustomer(ID) {
-
     var data = {
         "IBIF_ex": "UPDATE_FILE",
         "TAG": "B_TEST",
@@ -193,8 +232,6 @@ function updateCustomer(ID) {
     $("#customers").addClass("hidden");
 }
 
-
-
 function Update() {
     var data = {
         "IBIF_ex": "UPDATE_ID",
@@ -206,11 +243,14 @@ function Update() {
         "DEST_LOCATION": $("#input_dest_location").val(),
         "AMOUNT": parseInt($("#input_amount").val()),
         "SENDING_CUR": $("#input_sending_cur").val(),
-        "RECEIVING_CUR": $("#input_receiving_cur").val()
+        "RATE": parseInt($("#input_rate").val()),
+        "RECEIVING_CUR": $("#input_receiving_cur").val(),
+        "R_AMOUNT": parseInt($("#input_r_amount").val())
     };
 
 
     $.post(gc_RpcType, data, function (resp) {
+
         // customers();
         $("#up_TEST").addClass("hidden");
 
@@ -219,19 +259,19 @@ function Update() {
 }
 
 
-// Function to show confirmation modal
-function confirmDelete() {
-    $('#confirmDeleteModal').modal('show');
+// // Function to show confirmation modal
+// function confirmDelete() {
+//     $('#confirmDeleteModal').modal('show');
 
-    // Action when Yes button is clicked
-    $('#yesBtn').click(function () {
-        // Here you can place your code to delete the record from the database
-        // For now, let's just log a message
-        console.log("Record deleted!");
-        // Hide the modal
-        $('#confirmDeleteModal').modal('hide');
-    });
-}
+//     // Action when Yes button is clicked
+//     $('#yesBtn').click(function () {
+//         // Here you can place your code to delete the record from the database
+//         // For now, let's just log a message
+//         console.log("Record deleted!");
+//         // Hide the modal
+//         $('#confirmDeleteModal').modal('hide');
+//     });
+// }
 
 
 function delete_Cur(ID) {
@@ -244,3 +284,4 @@ function delete_Cur(ID) {
         transfer();
     });
 }
+
