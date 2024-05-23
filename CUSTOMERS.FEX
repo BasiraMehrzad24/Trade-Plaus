@@ -8,6 +8,7 @@
 <style>
 -INCLUDE style.css
 </style>
+
 -HTMLFORM END
 -REPORT
 
@@ -55,12 +56,10 @@
 -DEFAULT  &&LOCATION = &LOCATION.EVAL ;
 
 -TYPE &&ID  &&DATE  &&SENDER &&RECEIVER   &&SRC_LOCATION &&DEST_LOCATION &&AMOUNT &&SENDING_CUR &&RATE &&RECEIVING_CUR   &&R_AMOUNT  &&USER &&LOCATION 
-
-
 -*---------------------------temprorey colunm
 DEFINE FILE CURRENCY_TRANSFER
 UPDATE/A200 ='<button type="button" id="update" class="btn btn-primary"  onclick="updateCustomer('''||ID||''')">Update</button> ';
-DELEAT/A200 ='<button type="button" id="update" class="btn btn-danger" onclick="delete_Cur('''||ID||''')">Delet</button> ';
+DELEAT/A200 ='<button type="button" id="deleteButton" onclick="delete_Cur('''||ID||''')" class="btn btn-danger" >Delet</button> ';
 END 
 
 TABLE FILE CURRENCY_TRANSFER
@@ -76,3 +75,4 @@ TYPE=DATA,COLUMN=N12, COLOR=RGB(131 151 136),$
 ENDSTYLE
 END
 -RUN
+

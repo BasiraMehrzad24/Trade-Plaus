@@ -152,15 +152,15 @@ function currencyTransfer() {
 
 
 
-
+// THIS IS FOR MONEY TRANSFER FORM
 function multiplyAndFill(amount, rate) {
     var result = amount * rate;
     return result;
 }
-
 function handleKeyPress(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
+        // event.stopPropagation(); 
         var amount = parseFloat(document.getElementById('amount').value);
         var rate = parseFloat(document.getElementById('rate').value);
 
@@ -168,7 +168,7 @@ function handleKeyPress(event) {
             var result = multiplyAndFill(amount, rate);
             document.getElementById('r_amount').value = result;
         } else {
-            alert('Please enter valid numbers.');
+            alert("Let's Go");
 
         }
     }
@@ -177,37 +177,34 @@ document.addEventListener('keypress', handleKeyPress);
 
 
 
-function Fill(input_amount, input_rate) {
-    return input_amount * input_rate;
-}
 
-function handalFill(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        var input_amount = document.getElementById('input_amount').value;
-        var input_rate = document.getElementById('input_rate').value;
+function multiplyAndUpdateRecord() {
+    var input_amount = document.getElementById('input_amount').value;
+    var input_rate = document.getElementById('input_rate').value;
 
-        if (input_amount.trim() !== "" && input_rate.trim() !== "") {
-
-            var int_amount = parseInt(input_amount, 10);
-            var int_rate = parseInt(input_rate, 10);
-
-            if (!isNaN(int_amount) && !isNaN(int_rate)) {
-                var result = Fill(int_amount, int_rate);
-                document.getElementById('input_r_amount').value = result.toString();
-            } else {
-                alert('Please enter valid numbers.');
-            }
-        } else {
-            alert('Please enter valid strings.');
-        }
+    var float_amount = parseFloat(input_amount);
+    var float_rate = parseFloat(input_rate);
 
 
+    if (!isNaN(float_amount) && !isNaN(float_rate)) {
+
+        var result = float_amount * float_rate;
+        // var roundedResult = Math.round(result * 100) / 100;
+
+        document.getElementById('input_r_amount').value = result.toString();
+    } else {
+        alert('Please enter valid numbers.');
     }
 }
-document.getElementById('input_amount').addEventListener('keypress', handalFill);
-document.getElementById('input_rate').addEventListener('keypress', handalFill);
 
+function handleEnter(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        multiplyAndUpdateRecord();
+    }
+}
+document.getElementById('input_amount').addEventListener('keypress', handleEnter);
+document.getElementById('input_rate').addEventListener('keypress', handleEnter);
 
 
 
@@ -251,7 +248,7 @@ function Update() {
 
     $.post(gc_RpcType, data, function (resp) {
 
-        // customers();
+        customers();
         $("#up_TEST").addClass("hidden");
 
     });
@@ -259,22 +256,12 @@ function Update() {
 }
 
 
-// // Function to show confirmation modal
-// function confirmDelete() {
-//     $('#confirmDeleteModal').modal('show');
-
-//     // Action when Yes button is clicked
-//     $('#yesBtn').click(function () {
-//         // Here you can place your code to delete the record from the database
-//         // For now, let's just log a message
-//         console.log("Record deleted!");
-//         // Hide the modal
-//         $('#confirmDeleteModal').modal('hide');
-//     });
-// }
 
 
 function delete_Cur(ID) {
+    tmpvar = confirm("Are you sure you_want_to_assign_the_selected?");
+  if (tmpvar == true) {
+
     var data = {
         "IBIF_ex": "CURRENCY_TRANSFER",
         "TAG": "DELETE_CUR",
@@ -283,5 +270,5 @@ function delete_Cur(ID) {
     $.post(gc_RpcType, data, function (resp) {
         transfer();
     });
-}
+}}
 
