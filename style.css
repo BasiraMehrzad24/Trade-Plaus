@@ -237,6 +237,30 @@
   }
 
 
+  #error_msg{
+    width: 25%;
+    height: 100px;
+    background-color: #BAA898;
+    color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 17.5%;
+
+  }
+  
+  #error_mg{
+    width: 25%;
+    height: 100px;
+    background-color: #EEE0CB;
+    color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 17.5%;
+
+  }
+
 
 }
 

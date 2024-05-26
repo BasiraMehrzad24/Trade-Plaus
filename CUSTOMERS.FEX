@@ -1,5 +1,6 @@
 -DEFAULT &TAG ='REPORT';
--GOTO &TAG;
+-TYPE &TAG
+-GOTO &TAG
 -HTMLFORM BEGIN
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -8,8 +9,10 @@
 <style>
 -INCLUDE style.css
 </style>
-
 -HTMLFORM END
+
+
+
 -REPORT
 
 -SET &ID = ' ';

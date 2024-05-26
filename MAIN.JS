@@ -1,49 +1,64 @@
 //  for reload and response ________________
-function reload() {
+// function reload1() {
+//     var data = {
+//         "IBIF_ex": "SUPERUSER",
+//         "TAG": "REPORT",
+//         "RELOAD": "Y"
+//     };
+//     $.post(gc_RpcType, data, function (response) {
+//         $(".HOME").html(response);
+
+//     });
+
+// }
+
+
+function mainPage() {
     var data = {
         "IBIF_ex": "MAIN",
-        "TAG": "REPORT",
-        "RELOAD": "Y"
     };
     $.post(gc_RpcType, data, function (response) {
-        $("#up_TEST").html(response);
+        $("#home_page").html(response);
     });
 
 }
+
 
 function checkUser() {
 
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
+    if (email === "" || password === "") {
+        // $("#error_msg").text("Must not be empaty");
+        document.getElementById('error_msg');
+        $("#error_msg").removeClass("hidden");
+       
+        return;
+    }
     var data = {
         "IBIF_ex": "SUPERUSER",
         "TAG": "cUSER",
         "EMAIL": email,
-        "PASSWORD": password
+        "PASSWORD": password,
+
 
     };
-
     $.post(gc_RpcType, data, function (response) {
         if (response.includes(data.EMAIL) && response.includes(data.PASSWORD)) {
             mainPage();
         } else {
-            console.log("Something went wrong!");
+            // $("#error_msg").text("Invalid email or password . try again");
+            // alert("Invalid email or password . try again");
+            $("#error_mg").removeClass("hidden");
         }
-
-
-    });
-}
-
-function mainPage() {
-    var data = {
-        "IBIF_ex": "MAIN"
-    };
-    $.post(gc_RpcType, data, function (response) {
-        $("#innerdiv").html(response);
     });
 
+
+
 }
+
+
 
 
 
@@ -76,7 +91,7 @@ function dashboard() {
 
     $("#dashboard").removeClass("hidden");
     $("#customers").addClass("hidden");
-    $("#exchange").addClass("hidden");
+    $("#exchange").addClass("hidden");  $("#exchange").addClass("hidden");
     $("#exchangeDiv").addClass("hidden");
 };
 
@@ -98,6 +113,7 @@ function exchange() {
     $("#customers").addeClass("hidden");
     $("#dashboard").addClass("hidden");
     $("#up_TEST").addClass("hidden");
+    $("#updateCustomer").addClass("hidden");
 };
 
 function customers() {
@@ -146,13 +162,14 @@ function currencyTransfer() {
 
     };
     $.post(gc_RpcType, data, function (resp) {
-        $("#customers").html(resp);
+        // $("#customers").html(resp);
+        customers();
     });
 }
 
 
 
-// THIS IS FOR MONEY TRANSFER FORM
+// THIS IS FOR MONEY TRANSFER FORM INSERT , CULCULATE THE AMOUNT AND  RATE COLUMN
 function multiplyAndFill(amount, rate) {
     var result = amount * rate;
     return result;
@@ -177,7 +194,7 @@ document.addEventListener('keypress', handleKeyPress);
 
 
 
-
+// THIS IS FOR MONEY TRANSFER FORM UPDATE , CULCULATE THE AMOUNT AND  RATE COLUMN
 function multiplyAndUpdateRecord() {
     var input_amount = document.getElementById('input_amount').value;
     var input_rate = document.getElementById('input_rate').value;
@@ -257,18 +274,38 @@ function Update() {
 
 
 
-
-function delete_Cur(ID) {
-    tmpvar = confirm("Are you sure you_want_to_assign_the_selected?");
-  if (tmpvar == true) {
-
+//  for reload and response ________________
+function reload() {
     var data = {
-        "IBIF_ex": "CURRENCY_TRANSFER",
-        "TAG": "DELETE_CUR",
-        "ID": ID
+        "IBIF_ex": "MAIN",
+        "TAG": "REPORT",
+        "RELOAD": "Y"
     };
-    $.post(gc_RpcType, data, function (resp) {
-        transfer();
+    $.post(gc_RpcType, data, function (response) {
+
+        $(".HOME").html(response);
+
     });
-}}
+
+}
+function delete_Cur(ID) {
+    tmpvar = confirm("Are you sure to delete this customers?");
+    if (tmpvar == true) {
+
+        var data = {
+            "IBIF_ex": "CURRENCY_TRANSFER",
+            "TAG": "DELETE_CUR",
+            "ID": ID
+        };
+        $.post(gc_RpcType, data, function (resp) {
+            // transfer();
+            reload();
+        });
+    }
+}
+
+
+
+
+
 

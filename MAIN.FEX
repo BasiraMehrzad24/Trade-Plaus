@@ -1,12 +1,20 @@
--SET &&SUPERUSER ='Y'; 
--INCLUDE CUSTOMERS.FEX
+-* -SET &&SUPERUSER ='Y'; 
+-DEFAULT &TAG='REPORT';
+-DEFAULT &RELOAD = 'N';
+
+
+
 -*----------------------------------------------------------------FOR read data from database using [READFILE] 
+-REPORT
  TABLE FILE SUPERUSER
  PRINT NAME LOCATION AS LOCA
  ON TABLE SET ASNAMES ON
  ON TABLE HOLD AS USER_ADMIN FORMAT ALPHA
  END
 -RUN
+-IF &RELOAD NE 'Y' THEN GOTO HOME;
+-HOME
+
 -SET &NAME= ' ';
 -SET  &LOCA= ' ';
 
