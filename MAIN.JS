@@ -1,21 +1,9 @@
-//  for reload and response ________________
-// function reload1() {
-//     var data = {
-//         "IBIF_ex": "SUPERUSER",
-//         "TAG": "REPORT",
-//         "RELOAD": "Y"
-//     };
-//     $.post(gc_RpcType, data, function (response) {
-//         $(".HOME").html(response);
 
-//     });
-
-// }
-
-
-function mainPage() {
+function mainPage(email) {
+    email = $.trim(email);
     var data = {
         "IBIF_ex": "MAIN",
+        "EMAIL":email,
     };
     $.post(gc_RpcType, data, function (response) {
         $("#home_page").html(response);
@@ -25,15 +13,12 @@ function mainPage() {
 
 
 function checkUser() {
-
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
     if (email === "" || password === "") {
-        // $("#error_msg").text("Must not be empaty");
         document.getElementById('error_msg');
         $("#error_msg").removeClass("hidden");
-       
         return;
     }
     var data = {
@@ -41,24 +26,22 @@ function checkUser() {
         "TAG": "cUSER",
         "EMAIL": email,
         "PASSWORD": password,
-
-
+        
     };
     $.post(gc_RpcType, data, function (response) {
         if (response.includes(data.EMAIL) && response.includes(data.PASSWORD)) {
-            mainPage();
+            mainPage(data.EMAIL);
         } else {
-            // $("#error_msg").text("Invalid email or password . try again");
-            // alert("Invalid email or password . try again");
-            $("#error_mg").removeClass("hidden");
+            $("#error_msg").text("Invalid email or password.").removeClass("hidden");
         }
+
+    }).fail(function() {
+        // Handle AJAX error here, e.g., server not responding
+        $("#error_msg").text("An error occurred. Please try again later.").removeClass("hidden");
     });
-
-
+    
 
 }
-
-
 
 
 
@@ -91,7 +74,7 @@ function dashboard() {
 
     $("#dashboard").removeClass("hidden");
     $("#customers").addClass("hidden");
-    $("#exchange").addClass("hidden");  $("#exchange").addClass("hidden");
+    $("#exchange").addClass("hidden"); $("#exchange").addClass("hidden");
     $("#exchangeDiv").addClass("hidden");
 };
 
@@ -108,15 +91,24 @@ function transfer() {
 
 
 function exchange() {
+
     $("#exchange").removeClass("hidden");
     $("#exchangeDiv").addClass("hidden");
-    $("#customers").addeClass("hidden");
+    $("#customers").addClass("hidden");
     $("#dashboard").addClass("hidden");
     $("#up_TEST").addClass("hidden");
     $("#updateCustomer").addClass("hidden");
 };
 
 function customers() {
+    // var data = {
+    //     "IBIF_ex": "CUSTOMERS",
+
+    // };
+    // $.post(gc_RpcType, data, function (response) {
+
+    //     $("#customers").html(response);
+    // });
     $("#customers").removeClass("hidden");
     $("#exchange").addClass("hidden");
     $("#exchangeDiv").addClass("hidden");
