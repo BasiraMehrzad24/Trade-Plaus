@@ -15,3 +15,4 @@ FIELDNAME=USER,                     ALIAS=USER,                USAGE=A50,       
 FIELDNAME=LOCATION,              ALIAS=LOCATION,          USAGE=A255,          ACTUAL=A255,   $         
 FIELDNAME=RATE,                     ALIAS=RATE,                  USAGE=P10,           ACTUAL=P10.2,    $               
 FIELDNAME=R_AMOUNT,                     ALIAS=R_AMOUNT,                  USAGE=P10,           ACTUAL=P10.2,    $   
+FIELDNAME=CHECKED,                     ALIAS=CHECKED,                  USAGE=I1,           ACTUAL=I1,    $    

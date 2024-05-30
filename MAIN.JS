@@ -3,7 +3,7 @@ function mainPage(email) {
     email = $.trim(email);
     var data = {
         "IBIF_ex": "MAIN",
-        "EMAIL":email,
+        "EMAIL": email,
     };
     $.post(gc_RpcType, data, function (response) {
         $("#home_page").html(response);
@@ -26,7 +26,7 @@ function checkUser() {
         "TAG": "cUSER",
         "EMAIL": email,
         "PASSWORD": password,
-        
+
     };
     $.post(gc_RpcType, data, function (response) {
         if (response.includes(data.EMAIL) && response.includes(data.PASSWORD)) {
@@ -35,11 +35,11 @@ function checkUser() {
             $("#error_msg").text("Invalid email or password.").removeClass("hidden");
         }
 
-    }).fail(function() {
+    }).fail(function () {
         // Handle AJAX error here, e.g., server not responding
         $("#error_msg").text("An error occurred. Please try again later.").removeClass("hidden");
     });
-    
+
 
 }
 
@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
 function signOutPage() {
     var data = {
         "IBIF_ex": "SIGNOUT",
-
     };
     $.post(gc_RpcType, data, function (response) {
 
@@ -74,7 +73,8 @@ function dashboard() {
 
     $("#dashboard").removeClass("hidden");
     $("#customers").addClass("hidden");
-    $("#exchange").addClass("hidden"); $("#exchange").addClass("hidden");
+    $("#exchange").addClass("hidden");
+    $("#exchange").addClass("hidden");
     $("#exchangeDiv").addClass("hidden");
 };
 
@@ -91,7 +91,14 @@ function transfer() {
 
 
 function exchange() {
+    var data = {
+        "IBIF_ex": "DAILY_EXCHANGE",
 
+    };
+    $.post(gc_RpcType, data, function (response) {
+
+        $("#exchange").html(response);
+    });
     $("#exchange").removeClass("hidden");
     $("#exchangeDiv").addClass("hidden");
     $("#customers").addClass("hidden");
@@ -101,14 +108,14 @@ function exchange() {
 };
 
 function customers() {
-    // var data = {
-    //     "IBIF_ex": "CUSTOMERS",
+    var data = {
+        "IBIF_ex": "CUSTOMERS",
 
-    // };
-    // $.post(gc_RpcType, data, function (response) {
+    };
+    $.post(gc_RpcType, data, function (response) {
 
-    //     $("#customers").html(response);
-    // });
+        $("#customers").html(response);
+    });
     $("#customers").removeClass("hidden");
     $("#exchange").addClass("hidden");
     $("#exchangeDiv").addClass("hidden");
@@ -256,10 +263,8 @@ function Update() {
 
 
     $.post(gc_RpcType, data, function (resp) {
-
         customers();
         $("#up_TEST").addClass("hidden");
-
     });
     $("#up_TEST").removeClass("hidden");
 }
@@ -295,6 +300,51 @@ function delete_Cur(ID) {
         });
     }
 }
+
+
+//for updateing data when transfer is done 
+function checked(ID) {
+    var checkbox = $(this).closest("td").find(":checkbox");
+
+    var element = document.querySelector('[data-id="' + ID + '"]');
+    var isChecked = element.checked ? "1" : "0";
+
+    var data = {
+        "IBIF_ex": "DAILY_EXCHANGE",
+        "TAG": "EXCHANGE_2",
+        "ID": ID,
+        "CHECKED": isChecked
+    };
+    $.post(gc_RpcType, data, function (resp) {
+        $("#up_TEST").removeClass("hidden");
+
+    });
+    $("#up_TEST").addClass("hidden");
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
